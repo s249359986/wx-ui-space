@@ -1,7 +1,7 @@
 {
-  "name": "zanui-weapp",
-  "version": "3.0.3",
-  "description": "高颜值、好用、易扩展的小程序 UI 库，Powered by 有赞",
+  "name": "wx-ui-space",
+  "version": "0.0.1",
+  "description": "",
   "main": "app.js",
   "directories": {
     "example": "example"
@@ -19,17 +19,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/youzan/zanui-weapp.git"
+    "url": "git+ssh://github.com/s249359986/wx-ui-space.git"
   },
-  "author": "youzan",
+  "author": "7克",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/youzan/zanui-weapp/issues"
+    "url": ""
   },
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/youzan/zanui-weapp#readme",
+  "homepage": "",
   "devDependencies": {
     "autoprefixer": "^8.5.0",
     "babel-eslint": "^8.2.3",

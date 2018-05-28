@@ -1,10 +1,9 @@
 {
-  "name": "zanui-weapp",
+  "name": "wx-ui-space",
   "authors": [
-    "Nino <ninofocus@gmail.com>",
-    "Pangxie <pangxie@youzan.com>"
+    "7克 <249359986@qq.com>"    
   ],
-  "directory": "zanui-weapp",
+  "directory": "wx-ui-space",
   "description": "A UI Library for Weapp",
   "main": "zan",
   "license": "MIT",
