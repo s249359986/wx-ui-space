@@ -1,0 +1,47 @@
+<doc-page title="STEPS" without-padding>
+  <zan-panel>
+    <zan-cell-group>
+      <zan-cell>
+        <zan-steps type="horizon" steps="{{steps}}"></zan-steps>
+      </zan-cell>
+      <zan-cell>
+        <zan-steps type="horizon" steps="{{steps2}}"></zan-steps>
+      </zan-cell>
+      <zan-cell>
+        <zan-steps type="horizon" steps="{{steps3}}"></zan-steps>
+      </zan-cell>
+    </zan-cell-group>
+  </zan-panel>
+
+  <zan-panel title="有描述的steps">
+    <zan-cell-group>
+      <zan-cell>
+        <zan-steps type="horizon" hasDesc steps="{{steps}}"></zan-steps>
+      </zan-cell>
+      <zan-cell>
+        <zan-steps type="horizon" hasDesc steps="{{steps2}}"></zan-steps>
+      </zan-cell>
+      <zan-cell>
+        <zan-steps type="horizon" hasDesc steps="{{steps3}}"></zan-steps>
+      </zan-cell>
+    </zan-cell-group>
+  </zan-panel>
+
+  <zan-panel title="垂直方向的steps">
+    <zan-cell-group>
+      <zan-cell>
+        <zan-steps type="vertical" hasDesc steps="{{steps}}"></zan-steps>
+      </zan-cell>
+      <zan-cell>
+        <zan-steps type="vertical" hasDesc steps="{{steps2}}"></zan-steps>
+      </zan-cell>
+    </zan-cell-group>
+  </zan-panel>
+
+  <zan-panel title="可自定义 class">
+    <zan-cell>
+      <zan-steps type="vertical" steps="{{steps}}" className="my-class"></zan-steps>
+    </zan-cell>
+  </zan-panel>
+</doc-page>
+

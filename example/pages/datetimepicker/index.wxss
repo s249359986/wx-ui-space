@@ -1,0 +1,10 @@
+.pick-time-wrapper {
+    display: flex;
+    height: 200rpx;
+    flex-direction: row;
+    align-items: center;
+    font-family: PingFangSC-Light;
+    font-size: 30rpx;
+    color: #e6454a;
+    letter-spacing: 0;
+  }

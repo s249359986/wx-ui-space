@@ -1,0 +1,18 @@
+<view class="container">
+
+
+  <block wx:for="{{ list }}" wx:for-item="group" wx:key="title">
+    <zan-panel title="{{ group.title }}">
+      <zan-cell-group>
+        <zan-cell
+          wx:for="{{ group.content }}"
+          wx:key="name"
+          is-link
+          url="{{ item.path }}"
+          title="{{ item.name }}"
+        ></zan-cell>
+      </zan-cell-group>
+    </zan-panel>
+  </block>
+  
+</view>

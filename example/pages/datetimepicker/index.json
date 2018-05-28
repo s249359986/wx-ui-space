@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "datetimepicker 时间选择器",
+  "usingComponents": {
+    "doc-page": "../../components/doc-page/index",
+    "space-datetimepicker": "../../dist/datetimepicker/index"    
+  }  
+}
