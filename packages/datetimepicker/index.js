@@ -13,7 +13,7 @@ Component({
       }
     }
   },
-  data: { items: [[], [], []], multiIndex: [0, 0, 0], curDate:new Date(),minutes:['00分','15分','30分','45分']},
+  data: { curSelectObj:{disText: '现在', datetime: ''}, items: [[], [], []], multiIndex: [0, 0, 0], curDate:new Date(),minutes:['00分','15分','30分','45分']},
   attached: function () {
     this.setData({
       curDate: new Date()
@@ -77,39 +77,63 @@ Component({
         items[2].reverse()      
       }
       this.setData({
-        items: items
+        curSelectObj: {disText: '现在', datetime: new Date().getTime() },
+        items: items,
       })
 
     },
     getStatus:function(){
       return parseInt(this.properties.status) === 2 || parseInt(this.properties.status) === 0
     },
-    bindPickerChange: function (e) {          
+    bindPickerChange: function (e) {           
       let nowTime = new Date(this.data.curDate)
       let tempValue = e.detail.value      
-      if ((tempValue[0] + tempValue[1] + tempValue[2]) === 0) {
+      if ((tempValue[0] + tempValue[1] + tempValue[2]) === 0) {        
         if (this.getStatus()){          
           let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[0]] + this.data.items[2][tempValue[0]]
           let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
           let tempMinutes = Boolean(this.data.items[2].length)? this.data.items[2][tempValue[2]].replace('分', ''):0
+          
+          this.setData({
+            curSelectObj: {disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }            
+          })
           this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() })
         }
         else {
+
+          this.setData({
+            curSelectObj: {disText: '现在', datetime: nowTime.getTime() }            
+          })
+
           this.triggerEvent('onSelect', { disText: '现在', datetime: nowTime.getTime() })
         }
       }
-      if (tempValue[0] === 0 && tempValue[1] > 0) {
+      if (tempValue[0] === 0 && tempValue[1] > 0) {        
         let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[1]] + this.data.items[2][tempValue[2]]
         let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
         let tempMinutes = Boolean(this.data.items[2].length) ?this.data.items[2][tempValue[2]].replace('分', ''):0
+       
+        this.setData({
+          curSelectObj: { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }           
+        })
+       
         this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() })
       }
 
-      if (tempValue[0] > 0 || tempValue[2]>0) {
+      if (tempValue[0] > 0 || tempValue[2]>0) {        
         let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[1]] + this.data.items[2][tempValue[2]]
         let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
         let tempMinutes = Boolean(this.data.items[2].length) ?this.data.items[2][tempValue[2]].replace('分', ''):0
-        this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + tempValue[0], tempHour, tempMinutes, 0, 0).getTime() })
+       
+        if(tempText.indexOf('undefined') > -1) {
+          this.triggerEvent('onSelect', {disText:this.data.curSelectObj.disText ,datetime:this.data.curSelectObj.datetime} )
+        } else {
+          this.setData({
+            curSelectObj: { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + tempValue[0], tempHour, tempMinutes, 0, 0).getTime() }
+          })
+         
+          this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + tempValue[0], tempHour, tempMinutes, 0, 0).getTime() })
+        }        
       }
       
     },
