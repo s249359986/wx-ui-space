@@ -1,6 +1,10 @@
 Component({
   behaviors: [],
   properties: {
+    rangeText:{
+      type:Array,
+      value:['今天','明天','后天']
+    },
     range:{
       type:Number,
       value:7
@@ -30,19 +34,11 @@ Component({
         tempI=1
       }
       for (let i = tempI; i < this.data.range + tempI; i++) {
-        switch (i) {
-          case 0:
-            items[0].push('今天')
-            break;
-          case 1:
-            items[0].push('明天')
-            break;
-          case 2:
-            items[0].push('后天')
-            break;
-          default:
-            let tempOtherDate = new Date(nowDate.getTime() + i * 24 * 60 * 60 * 1000)
-            items[0].push(tempOtherDate.getMonth() + 1 + '月' + tempOtherDate.getDate() + '日')
+        if(i < this.data.rangeText.length){
+          items[0].push(this.data.rangeText[i])
+        } else {
+          let tempOtherDate = new Date(nowDate.getTime() + i * 24 * 60 * 60 * 1000)
+          items[0].push(tempOtherDate.getMonth() + 1 + '月' + tempOtherDate.getDate() + '日')
         }
       }
       let hours = nowDate.getHours()
