@@ -1,0 +1,7 @@
+  <view>
+<picker mode = 'multiSelector' bindcolumnchange="bindcolumnchange" bindchange="bindPickerChange" value="{{multiIndex}}" range="{{items}}">
+     <slot>
+     <view>现在</view>
+     </slot>
+  </picker>
+  </view>
