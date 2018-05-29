@@ -1,9 +1,12 @@
-## 使用
+## datetimepicker 日期选择组件
 
-1. 使用 [Bower] 将 [wx-ui-space] 添加到你的项目中使用。
-我们推荐在你的`app.wxss`直接引入`zanui-weapp/dist/index.wxss`。
-#### 1. 正常引用
+### 使用指南
+在 app.wxss 中引入组件库所有样式
+```css
+@import "path/to/wx-ui-space/dist/datetimepicker/index.wxss";
+```
 
+### 代码演示
 在 index.json 中引入组件
 ```json
 {
@@ -15,8 +18,7 @@
 在wxml中引入
 ```html
 <space-datetimepicker bind:onSelect='handleSelect' range="3" status="7">            
-              <slot></slot>                       
-              
+              <view>{{useCarTime}}</view>                          
           </space-datetimepicker>
 ```
 #### 属性

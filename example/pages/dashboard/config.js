@@ -1,6 +1,6 @@
 export default {
   base: {
-    title: '基础组件',
+    title: '业务组件',
     content: [
       {
         name: 'datatimepick 时间日期选择器',
