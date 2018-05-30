@@ -3,7 +3,8 @@ const postcss = require('gulp-postcss');
 const cssmin = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const gutil = require('gulp-util');
-const removeLogging = require('gulp-remove-logging');
+//const removeLogging = require('gulp-remove-logging');
+const stripDebug = require('gulp-strip-debug');
 
 const options = gutil.env;
 const isProduction = process.env.NODE_ENV === 'production';
@@ -20,9 +21,10 @@ gulp.task('compile-css', () => {
 
 gulp.task('compile-js', () => {
   return gulp.src(['../../packages/**/*.js'])
-    .pipe(removeLogging({
-      methods: isProduction ? ['log', 'info'] : []
-    }))
+  .pipe(isProduction? stripDebug():'')
+    // .pipe(removeLogging({
+    //   methods: isProduction ? ['log', 'info'] : []
+    // }))
     .pipe(gulp.dest(options.dist));
 });
 
