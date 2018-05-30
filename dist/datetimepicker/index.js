@@ -134,7 +134,14 @@ Component({
       
     },
     bindcolumnchange: function (e) {      
-      +1
+      void 0
+      let items = []
+      if (this.getStatus()){        
+        if (e.detail.column === 0 && e.detail.value === 0) {
+          items = this.data.items
+          items[1] = []          
+          let nowDate = new Date(this.data.curDate)
+          let hours = nowDate.getHours()+1
           for (let i = hours; i < 24; i++) {
             let temp =i + '点'
             items[1].push(temp)
@@ -183,7 +190,14 @@ Component({
         }
 
       }else{
-        for (let i = hours; i < 24; i++) {
+        void 0
+        if (e.detail.column === 0 && e.detail.value === 0) {
+          items = this.data.items
+          items[1] = []
+          items[2] = []
+          let nowDate = new Date(this.data.curDate)
+          let hours = nowDate.getHours()
+          for (let i = hours; i < 24; i++) {
             let temp = i === hours ? '现在' : i + '点'
             items[1].push(temp)
           }

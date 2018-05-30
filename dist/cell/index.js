@@ -1,6 +1,6 @@
 const warn = (msg, getValue) => {
-  console.warn(msg);
-  
+  void 0;
+  void 0;
 };
 
 Component({
