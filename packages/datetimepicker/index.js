@@ -9,6 +9,10 @@ Component({
       type:Number,
       value:7
     },
+    rangeDate: {//预约单距离现在多久可以使用
+      type: Number,
+      value: 45
+    },
     status:{
       type:String,
       value:'1',
@@ -25,7 +29,7 @@ Component({
     this.initData()
   },
   methods: {
-    initData:function(){         
+    initData:function(){
       let nowDate = new Date(this.data.curDate)
       let items = []
       items = [[], [], []]
@@ -52,25 +56,25 @@ Component({
             }
           }else{
             continue
-          }          
+          }
         } else {
           temp = i === hours ? '现在' : i + '点'
           items[1].push(temp)
         }
       }
       if (this.getStatus()) {
-        let count = parseInt((120 - nowDate.getMinutes()-45)/15)
+        let count = parseInt((120 - nowDate.getMinutes()-this.data.rangeDate)/15)
         let tempM=60
-        for(let i=0;i<count;i++){    
-          tempM = tempM -15  
-          if(tempM===0)     
+        for(let i=0;i<count;i++){
+          tempM = tempM -15
+          if(tempM===0)
           {
-            items[2].push('00分')    
+            items[2].push('00分')
           }else {
-            items[2].push(tempM + '分')                               
-          }          
-        }  
-        items[2].reverse()      
+            items[2].push(tempM + '分')
+          }
+        }
+        items[2].reverse()
       }
       this.setData({
         curSelectObj: {disText: '现在', datetime: new Date().getTime() },
@@ -81,65 +85,65 @@ Component({
     getStatus:function(){
       return parseInt(this.properties.status) === 2 || parseInt(this.properties.status) === 0
     },
-    bindPickerChange: function (e) {           
+    bindPickerChange: function (e) {
       let nowTime = new Date(this.data.curDate)
-      let tempValue = e.detail.value      
-      if ((tempValue[0] + tempValue[1] + tempValue[2]) === 0) {        
-        if (this.getStatus()){          
+      let tempValue = e.detail.value
+      if ((tempValue[0] + tempValue[1] + tempValue[2]) === 0) {
+        if (this.getStatus()){
           let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[0]] + this.data.items[2][tempValue[0]]
           let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
           let tempMinutes = Boolean(this.data.items[2].length)? this.data.items[2][tempValue[2]].replace('分', ''):0
-          
+
           this.setData({
-            curSelectObj: {disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }            
+            curSelectObj: {disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }
           })
           this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() })
         }
         else {
 
           this.setData({
-            curSelectObj: {disText: '现在', datetime: nowTime.getTime() }            
+            curSelectObj: {disText: '现在', datetime: nowTime.getTime() }
           })
 
           this.triggerEvent('onSelect', { disText: '现在', datetime: nowTime.getTime() })
         }
       }
-      if (tempValue[0] === 0 && tempValue[1] > 0) {        
+      if (tempValue[0] === 0 && tempValue[1] > 0) {
         let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[1]] + this.data.items[2][tempValue[2]]
         let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
         let tempMinutes = Boolean(this.data.items[2].length) ?this.data.items[2][tempValue[2]].replace('分', ''):0
-       
+
         this.setData({
-          curSelectObj: { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }           
+          curSelectObj: { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() }
         })
-       
+
         this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate(), tempHour, tempMinutes, 0, 0).getTime() })
       }
 
-      if (tempValue[0] > 0 || tempValue[2]>0) {        
+      if (tempValue[0] > 0 || tempValue[2]>0) {
         let tempText = this.data.items[0][tempValue[0]] + this.data.items[1][tempValue[1]] + this.data.items[2][tempValue[2]]
         let tempHour = this.data.items[1][tempValue[1]].replace('点', '')
         let tempMinutes = Boolean(this.data.items[2].length) ?this.data.items[2][tempValue[2]].replace('分', ''):0
-       
+
         if(tempText.indexOf('undefined') > -1) {
           this.triggerEvent('onSelect', {disText:this.data.curSelectObj.disText ,datetime:this.data.curSelectObj.datetime} )
         } else {
           this.setData({
             curSelectObj: { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + tempValue[0], tempHour, tempMinutes, 0, 0).getTime() }
           })
-         
+
           this.triggerEvent('onSelect', { disText: tempText, datetime: new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate() + tempValue[0], tempHour, tempMinutes, 0, 0).getTime() })
-        }        
+        }
       }
-      
+
     },
-    bindcolumnchange: function (e) {      
+    bindcolumnchange: function (e) {
       console.info(this.data.multiIndex)
       let items = []
-      if (this.getStatus()){        
+      if (this.getStatus()){
         if (e.detail.column === 0 && e.detail.value === 0) {
           items = this.data.items
-          items[1] = []          
+          items[1] = []
           let nowDate = new Date(this.data.curDate)
           let hours = nowDate.getHours()+1
           for (let i = hours; i < 24; i++) {
@@ -154,7 +158,7 @@ Component({
             }
           }
           items[2] = []
-          let count = parseInt((120 - nowDate.getMinutes() - 45) / 15)
+          let count = parseInt((120 - nowDate.getMinutes() - this.data.rangeDate) / 15)
           let tempM = 60
           for (let i = 0; i < count; i++) {
             tempM = tempM - 15
@@ -164,7 +168,7 @@ Component({
               items[2].push(tempM + '分')
             }
           }
-          items[2].reverse()  
+          items[2].reverse()
           this.setData({ items: items, multiIndex: [0, 0, 0] })
         }
         if (e.detail.column === 0 && e.detail.value > 0) {
@@ -178,7 +182,7 @@ Component({
           }
           this.setData({ items: items })
         }
-        if (e.detail.column === 1 && e.detail.value === 0) {          
+        if (e.detail.column === 1 && e.detail.value === 0) {
           items = this.data.items
           items[2] = ['45分']
           this.setData({ items: items })
@@ -204,7 +208,7 @@ Component({
           this.setData({ items: items, multiIndex: [0, 0, 0] })
         }
         if (e.detail.column === 0 && e.detail.value > 0) {
-          
+
           items = this.data.items
           let hours = 0
           items[1]=[]
@@ -225,11 +229,11 @@ Component({
           items[2] = this.data.minutes
           this.setData({ items: items })
         }
-      }    
+      }
       let tempMultiIndex = this.data.multiIndex
       tempMultiIndex[e.detail.column] = e.detail.value
       this.setData({ multiIndex: tempMultiIndex})
-      
+
     }
 
   }
