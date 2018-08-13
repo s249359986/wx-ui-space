@@ -1,7 +1,7 @@
 ## 使用
 
 1. 使用 [Bower] 将 [wx-ui-space] 添加到你的项目中使用。
-我们推荐在你的`app.wxss`直接引入`zanui-weapp/dist/index.wxss`。
+
 #### 1. 正常引用
 
 在 index.json 中引入组件
