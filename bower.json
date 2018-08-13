@@ -1,11 +1,11 @@
 {
   "name": "wx-ui-space",
   "authors": [
-    "7克 <249359986@qq.com>"    
+    "7克 <249359986@qq.com>"
   ],
   "directory": "wx-ui-space",
   "description": "A UI Library for Weapp",
-  "main": "zan",
+  "main": "space",
   "license": "MIT",
   "homepage": "",
   "ignore": [
