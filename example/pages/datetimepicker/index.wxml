@@ -1,6 +1,6 @@
 <doc-page title="datetimepicker">
 <view class='pick-time-wrapper'>
-    <space-datetimepicker bind:onSelect='handleSelect' rangeText="{{['今天','明天']}}" status="{{driver_status}}">            
+    <space-datetimepicker bind:onSelect='handleSelect' rangeDate="{{driver_rangeDate}}" rangeText="{{['今天','明天']}}" status="{{driver_status}}">            
               <view>{{useCarTime}}</view>                          
           </space-datetimepicker>
           </view>

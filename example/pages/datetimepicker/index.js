@@ -3,7 +3,8 @@
 Page({
   data: {
     useCarTime: '现在',
-    driver_status: '1'
+    driver_status: '2',
+    driver_rangeDate:43
   },
   handleSelect(res) {
     console.log('选择时间', res)
