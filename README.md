@@ -16,7 +16,7 @@
 ```html
 <space-datetimepicker bind:onSelect='handleSelect' range="3" status="7">            
               <slot></slot>                       
-              
+
           </space-datetimepicker>
 ```
 #### 属性
@@ -24,7 +24,8 @@
 |-----------|-----------|-----------|-------------|-------------|-------------|
 | range | 距离现在的天数 | Number | 7 | -|-|
 | status | 业务类型 | String | 1 |-|2或者0时无法设置为当前时间|  
-| rangeText | 对应日期的别称 | Array | ['今天','明天','后天'] |-|-| 
+| rangeText | 对应日期的别称 | Array | ['今天','明天','后天'] |-|-|
+| rangeDate | 设置最近日期间隔时间（分钟） | Number | 45 |-|-|
 
 #### 事件
 | 名称      | 说明      | 类型       | 参数       | 必须      |备注 |
