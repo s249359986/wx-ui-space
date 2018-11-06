@@ -231,5 +231,6 @@ Component({
       this.setData({ multiIndex: tempMultiIndex})
       
     }
+
   }
 })
